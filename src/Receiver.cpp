@@ -18,7 +18,7 @@ void Receiver::Node::run()
 
 void Receiver::Node::onDataReceived(const Socket::IPFrame & frame)
 {
-  UNIMPLEMENTED(__PRETTY_FUNCTION__);
+  Utils::Message::deserialize(frame, data);
 
-  RCLCPP_INFO(logger, "\n\tstamp: %ld", data.timestamp);
+  RCLCPP_INFO(logger, "\n\tstamp: %ld\n\tx: %f\n\ty: %f\n\tz: %f", data.timestamp, data.x, data.y, data.z);
 }
