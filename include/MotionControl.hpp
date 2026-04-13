@@ -4,6 +4,7 @@
 #include <vector>
 #include <math.h>
 #include <thread>
+#include "geometry_msgs/msg/transform_stamped.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
@@ -59,6 +60,36 @@ class MotionControlNode : public rclcpp::Node {
         geometry_msgs::msg::PoseStamped current_pose_;
         geometry_msgs::msg::PoseStamped goal_pose_;
         sensor_msgs::msg::LaserScan laser_scan_;
+        
+        //moje funkce
+        void transformToRobotFrame(const geometry_msgs::msg::PoseStamped & target, double & x_r, double & y_r);
+        bool getLookaheadPoint(geometry_msgs::msg::PoseStamped & lookahead);
+        
+        //moje 
+        uint32_t waypoint_pointer;
+        
+        //threshold pro detekci kolize
+        double col_threshold;
+        bool collisionDetected;
+        
+        double goal_threshold;
+        bool plan_received;
+        
+        double prev_distance_err;
+        
+        double x_vel;
+     
+        double current_time;
+        double prev_time;
+        double dt;
+            
+        //pure pursuit
+        double lookahead_distance_ = 0.5;
+	double max_linear_speed_ = 0.2;
+	double max_angular_speed_ = 1.0;
+	double min_linear_speed_ = 0.00;
+	
+	bool found = 0;
     };
 
 

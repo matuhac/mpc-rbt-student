@@ -48,6 +48,8 @@ private:
     // Data
     nav_msgs::msg::OccupancyGrid map_;
     nav_msgs::msg::Path path_;
+    
+    bool dilated;
 };
 
 #endif // PLANNING_HPP
